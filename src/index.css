@@ -67,6 +67,19 @@ a {
   background-color: #28a745;
 }
 
+.button--error {
+  color: #ffffff;
+  background-color: #dc3545;
+}
+
+.error {
+  display: block;
+  margin-top: 10px;
+
+  text-align: center;
+  color: #dc3545;
+}
+
 .wrapper {
   max-width: 50%;
   min-width: 720px;
