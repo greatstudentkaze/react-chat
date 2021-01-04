@@ -22,8 +22,9 @@ const Join = ({ onLogin }) => {
 
     setIsError(false);
     setLoading(true);
-    await axios.post('/rooms', {roomId, username});
-    onLogin();
+    const obj = { roomId, username };
+    await axios.post('/rooms', obj);
+    onLogin(obj);
   };
 
   return (
