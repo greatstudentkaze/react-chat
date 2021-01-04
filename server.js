@@ -14,8 +14,17 @@ const roomDatabase = new Map();
 // Allows app to receive json data
 app.use(express.json());
 
-app.get('/rooms', (request, response) => {
-  response.json(roomDatabase);
+app.get('/rooms/:id', (request, response) => {
+  const { id: roomId } = request.params;
+  const data = roomDatabase.has(roomId)
+    ? {
+      users: [...roomDatabase.get(roomId).get('users').values()],
+      messages: [...roomDatabase.get(roomId).get('messages').values()]
+    }
+    : { users: [], messages: [] };
+
+  console.log(data)
+  response.json(data);
 });
 
 app.post('/rooms', (request, response) => {
@@ -37,7 +46,16 @@ io.of('/').on('connection', socket => {
     roomDatabase.get(roomId).get('users').set(socket.id, username);
 
     const users = [...roomDatabase.get(roomId).get('users').values()];
-    socket.to(roomId).broadcast.emit('ROOM:JOINED', users);
+    socket.to(roomId).broadcast.emit('ROOM:SET_USERS', users);
+  });
+
+  socket.on('disconnect', () => {
+    roomDatabase.forEach((room, roomId) => {
+      if (room.get('users').delete(socket.id)) {
+        const users = [...room.get('users').values()];
+        socket.to(roomId).broadcast.emit('ROOM:SET_USERS', users);
+      }
+    });
   });
 
   console.log('user connected, socket id:', socket.id);
