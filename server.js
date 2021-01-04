@@ -31,8 +31,16 @@ app.post('/rooms', (request, response) => {
   response.send(); // send response status 200
 });
 
-io.of('/').use((socket, next) => {
-  console.log('user connected, socket id:', socket.id)
+io.of('/').on('connection', socket => {
+  socket.on('ROOM:JOIN', ({ roomId, username }) => {
+    socket.join(roomId);
+    roomDatabase.get(roomId).get('users').set(socket.id, username);
+
+    const users = [...roomDatabase.get(roomId).get('users').values()];
+    socket.to(roomId).broadcast.emit('ROOM:JOINED', users);
+  });
+
+  console.log('user connected, socket id:', socket.id);
 });
 
 server.listen(4444, (err) => {
