@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 
 import socket from '../../socket';
 
@@ -16,10 +17,11 @@ const Join = () => {
       setIsError(true);
       evt.target.classList.add('button--error');
       return;
-    } else {
-      setIsError(false);
     }
-    console.log(roomId, username);
+
+    setIsError(false);
+    axios.post('/rooms', {roomId, username})
+      .catch(err => console.error(err));
   };
 
   return (
