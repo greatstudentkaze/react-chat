@@ -1,7 +1,14 @@
-function App() {
+import socket from './socket';
+
+import Join from './components/Join';
+
+const App = () => {
+
   return (
     <div className="App">
-      hello react
+      <div className="wrapper">
+        <Join />
+      </div>
     </div>
   );
 }
