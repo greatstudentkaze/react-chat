@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Chat = () => {
+const Chat = ({ users, messages }) => {
   const [messageText, setMessageText] = useState('');
 
   const handleSubmit = evt => {
@@ -11,12 +11,9 @@ const Chat = () => {
   return (
     <div className="chat">
       <div className="chat__users users">
-        <b>Пользователи <span title="Количество пользователей онлайн">(1)</span>:</b>
+        <b>Пользователи <span title="Количество пользователей онлайн">({users.length})</span>:</b>
         <ul className="users__list">
-          <li className="users__item">Test User</li>
-          <li className="users__item">Test User</li>
-          <li className="users__item">Test User</li>
-          <li className="users__item">Test User</li>
+          {users.map((username, i) => <li key={username + i} className="users__item">{username}</li>)}
         </ul>
       </div>
       <div className="chat__main">
