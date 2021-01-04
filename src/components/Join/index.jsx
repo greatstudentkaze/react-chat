@@ -6,8 +6,8 @@ import socket from '../../socket';
 import Error from './Error';
 
 const Join = ({ onLogin }) => {
-  const [roomId, setRoomId] = useState('');
-  const [username, setUsername] = useState('');
+  const [roomId, setRoomId] = useState('1');
+  const [username, setUsername] = useState('gsk');
   const [isError, setIsError] = useState(false);
   const [isLoading, setLoading] = useState(false);
 
