@@ -1,10 +1,16 @@
-# Getting Started with Create React App
+# Getting Started with react-chat
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Project setup
 
-In the project directory, you can run:
+### `npm install`
+
+Installs all packages
+
+### `npm run server`
+
+Runs the server app in the development mode
 
 ### `npm start`
 
@@ -13,6 +19,16 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+## Demo
+
+![](./demo/1.png)
+![](./demo/2.png)
+![](./demo/3.png)
+
+## Other available Scripts
+
+In the project directory, you can run:
 
 ### `npm test`
 
