@@ -1,6 +1,6 @@
 import socket from './socket';
 
-import Join from './components/Join';
+import Join from './components/Join/Join';
 
 const App = () => {
 
