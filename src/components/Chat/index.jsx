@@ -11,7 +11,7 @@ const Chat = () => {
   return (
     <div className="chat">
       <div className="chat__users users">
-        <b>Users (1):</b>
+        <b>Пользователи <span title="Количество пользователей онлайн">(1)</span>:</b>
         <ul className="users__list">
           <li className="users__item">Test User</li>
           <li className="users__item">Test User</li>
