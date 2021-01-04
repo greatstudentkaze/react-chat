@@ -5,12 +5,13 @@ import socket from '../../socket';
 
 import Error from './Error/Error';
 
-const Join = () => {
+const Join = ({ onLogin }) => {
   const [roomId, setRoomId] = useState('');
   const [username, setUsername] = useState('');
   const [isError, setIsError] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
-  const onEnter = evt => {
+  const onEnter = async evt => {
     evt.target.classList.remove('button--error');
 
     if (!roomId || !username) {
@@ -20,8 +21,9 @@ const Join = () => {
     }
 
     setIsError(false);
-    axios.post('/rooms', {roomId, username})
-      .catch(err => console.error(err));
+    setLoading(true);
+    await axios.post('/rooms', {roomId, username});
+    onLogin();
   };
 
   return (
@@ -34,7 +36,9 @@ const Join = () => {
         Никнейм
         <input className="join__input" type="text" value={username} onChange={evt => setUsername(evt.target.value)} placeholder="gsk"/>
       </label>
-      <button className="join__button button button--green" onClick={onEnter}>Войти</button>
+      <button className="join__button button button--green" onClick={onEnter} disabled={isLoading}>
+        {isLoading ? 'Вход...' : 'Войти'}
+      </button>
       {isError && <Error />}
     </div>
   )
