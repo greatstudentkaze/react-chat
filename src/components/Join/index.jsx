@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import socket from '../../socket';
 
-import Error from './Error/Error';
+import Error from './Error';
 
 const Join = ({ onLogin }) => {
   const [roomId, setRoomId] = useState('');

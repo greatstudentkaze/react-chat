@@ -3,7 +3,7 @@ import { useReducer, useEffect } from 'react';
 import socket from './socket';
 import reducer from './reducer';
 
-import Join from './components/Join/Join';
+import Join from './components/Join';
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, {
