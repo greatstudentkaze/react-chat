@@ -23,7 +23,6 @@ app.get('/rooms/:id', (request, response) => {
     }
     : { users: [], messages: [] };
 
-  console.log(data)
   response.json(data);
 });
 
@@ -47,6 +46,13 @@ io.of('/').on('connection', socket => {
 
     const users = [...roomDatabase.get(roomId).get('users').values()];
     socket.to(roomId).broadcast.emit('ROOM:SET_USERS', users);
+  });
+
+  socket.on('ROOM:NEW_MESSAGE', ({ roomId, username, text }) => {
+    const message = { username, text };
+
+    roomDatabase.get(roomId).get('messages').push(message);
+    socket.to(roomId).broadcast.emit('ROOM:NEW_MESSAGE', message);
   });
 
   socket.on('disconnect', () => {
