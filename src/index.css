@@ -239,6 +239,7 @@ a {
 
   border: 1px solid #cccccc;
   border-radius: 3px;
+  resize: none;
 }
 
 .chat__button {
